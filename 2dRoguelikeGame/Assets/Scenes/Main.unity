@@ -413,9 +413,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b47d0390bdd3cdf469cd243b4d83b95d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BoardManager
-  Width: 0
-  Height: 0
-  GroundTiles: []
+  Width: 8
+  Height: 8
+  GroundTiles:
+  - {fileID: 11400000, guid: c69f96362f33d624b8b7da943ce19e7e, type: 2}
+  - {fileID: 11400000, guid: d3aef12091490274baa7422da5592411, type: 2}
+  - {fileID: 11400000, guid: c7e60c702632f6643857a439621759e2, type: 2}
+  - {fileID: 11400000, guid: fd4c784b1c63f124e82dc7d99fdb94ea, type: 2}
 --- !u!156049354 &1723209852
 Grid:
   m_ObjectHideFlags: 0
