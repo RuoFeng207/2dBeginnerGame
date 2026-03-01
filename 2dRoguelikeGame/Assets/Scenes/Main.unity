@@ -206,7 +206,7 @@ Transform:
   m_GameObject: {fileID: 857274765}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 4, y: 4, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -282,7 +282,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 953710072}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -424,6 +424,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a7e0d91a3c273a945b71cc79a309c31e, type: 2}
   - {fileID: 11400000, guid: 3e06d8c7fd8390c42b11bbecfbe1b0c2, type: 2}
   - {fileID: 11400000, guid: 500d849f5032c764da4db96b27601fdd, type: 2}
+  WallTiles:
+  - {fileID: 11400000, guid: b7680c8b26c5d13489db905c3a72b493, type: 2}
+  - {fileID: 11400000, guid: e8fdfbd03776ae24885e8358718c6938, type: 2}
 --- !u!156049354 &1723209852
 Grid:
   m_ObjectHideFlags: 0
