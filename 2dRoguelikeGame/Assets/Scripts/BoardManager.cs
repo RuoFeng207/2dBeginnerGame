@@ -35,36 +35,34 @@ public class BoardManager : MonoBehaviour
         return m_BoardData[cellIndex.x, cellIndex.y];
     }
 
-   // Start is called before the first frame update
-   void Start()
+   // Init is called before the first frame update
+   public void Init()
     {
-    m_Tilemap = GetComponentInChildren<Tilemap>();
-    m_Grid = GetComponentInChildren<Grid>();
-    
-    m_BoardData = new CellData[Width, Height];
+        m_Tilemap = GetComponentInChildren<Tilemap>();
+        m_Grid = GetComponentInChildren<Grid>();
+        
+        m_BoardData = new CellData[Width, Height];
 
-    for (int y = 0; y < Height; ++y)
-    {
-        for(int x = 0; x < Width; ++x)
+        for (int y = 0; y < Height; ++y)
         {
-            Tile tile;
-            m_BoardData[x, y] = new CellData();
-
-            if(x == 0 || y == 0 || x == Width - 1 || y == Height - 1)
+            for(int x = 0; x < Width; ++x)
             {
-                tile = WallTiles[Random.Range(0, WallTiles.Length)];
-                m_BoardData[x, y].Passable = false;
-            }
-            else
-            {
-                tile = GroundTiles[Random.Range(0, GroundTiles.Length)];
-                m_BoardData[x, y].Passable = true;
-            }
+                Tile tile;
+                m_BoardData[x, y] = new CellData();
 
-            m_Tilemap.SetTile(new Vector3Int(x, y, 0), tile);
+                if(x == 0 || y == 0 || x == Width - 1 || y == Height - 1)
+                {
+                    tile = WallTiles[Random.Range(0, WallTiles.Length)];
+                    m_BoardData[x, y].Passable = false;
+                }
+                else
+                {
+                    tile = GroundTiles[Random.Range(0, GroundTiles.Length)];
+                    m_BoardData[x, y].Passable = true;
+                }
+
+                m_Tilemap.SetTile(new Vector3Int(x, y, 0), tile);
+            }
         }
-    }
-
-    Player.Spawn(this, new Vector2Int(1, 1));
     }
 }
