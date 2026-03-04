@@ -37,6 +37,23 @@ public class BoardManager : MonoBehaviour
         return m_BoardData[cellIndex.x, cellIndex.y];
     }
 
+    void GenerateFood()
+    {
+    int foodCount = 5;
+        for (int i = 0; i < foodCount; ++i)
+        {
+            int randomX = Random.Range(1, Width-1);
+            int randomY = Random.Range(1, Height-1);
+            CellData data = m_BoardData[randomX, randomY];
+            if (data.Passable && data.ContainedObject == null)
+            {
+                GameObject newFood = Instantiate(FoodPrefab);
+                newFood.transform.position = CellToWorld(new Vector2Int(randomX, randomY));
+                data.ContainedObject = newFood;
+            }
+        }
+    }
+
    // Init is called before the first frame update
    public void Init()
     {
@@ -66,5 +83,6 @@ public class BoardManager : MonoBehaviour
                 m_Tilemap.SetTile(new Vector3Int(x, y, 0), tile);
             }
         }
+    GenerateFood();
     }
 }
