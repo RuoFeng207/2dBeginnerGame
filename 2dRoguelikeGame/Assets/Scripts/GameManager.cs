@@ -1,10 +1,13 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 public class GameManager : MonoBehaviour
 {
    public static GameManager Instance { get; private set; }
   
    public BoardManager BoardManager;
    public PlayerController PlayerController;
+   public UIDocument UIDoc;
+   private Label m_FoodLabel;
 
    public TurnManager TurnManager { get; private set;}
    private int m_FoodAmount = 100;
@@ -22,6 +25,8 @@ public class GameManager : MonoBehaviour
   
    void Start()
    {
+       m_FoodLabel = UIDoc.rootVisualElement.Q<Label>("FoodLabel");
+       m_FoodLabel.text = "Food : " + m_FoodAmount;
        TurnManager = new TurnManager();
        TurnManager.OnTick += OnTurnHappen;
       

@@ -9,10 +9,12 @@ public class BoardManager : MonoBehaviour
     public Tile[] GroundTiles;
     public Tile[] WallTiles;
     public PlayerController Player;
-
+    public GameObject FoodPrefab;
+    
     public class CellData
     {
         public bool Passable;
+        public GameObject ContainedObject;
     }
     
     private CellData[,] m_BoardData;
