@@ -10,13 +10,13 @@ public class BoardManager : MonoBehaviour
     public Tile[] GroundTiles;
     public Tile[] WallTiles;
     public PlayerController Player;
-    public GameObject[] FoodPrefabs;
+    public FoodObject[] FoodPrefabs;
     private List<Vector2Int> m_EmptyCellsList;
     
     public class CellData
     {
         public bool Passable;
-        public GameObject ContainedObject;
+        public CellObject ContainedObject;
     }
     
     private CellData[,] m_BoardData;
@@ -50,9 +50,9 @@ public class BoardManager : MonoBehaviour
     
             m_EmptyCellsList.RemoveAt(randomIndex);
             CellData data = m_BoardData[coord.x, coord.y];
-            GameObject foodPrefab = FoodPrefabs[Random.Range(0, FoodPrefabs.Length)];
+            FoodObject foodPrefab = FoodPrefabs[Random.Range(0, FoodPrefabs.Length)];
             Debug.Log(foodPrefab.name);
-            GameObject newFood = Instantiate(foodPrefab);
+            FoodObject newFood = Instantiate(foodPrefab);
             newFood.transform.position = CellToWorld(coord);
             data.ContainedObject = newFood;
         }

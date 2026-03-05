@@ -47,17 +47,18 @@ public class PlayerController : MonoBehaviour
 
        if(hasMoved)
        {
-           //check if the new position is passable, then move there if it is.
-           BoardManager.CellData cellData = m_Board.GetCellData(newCellTarget);
+        BoardManager.CellData cellData = m_Board.GetCellData(newCellTarget);
 
-           if(cellData != null && cellData.Passable)
-           {
-               GameManager.Instance.TurnManager.Tick();
-               MoveTo(newCellTarget);
-           }
-       }
+        if(cellData != null && cellData.Passable)
+            {
+                GameManager.Instance.TurnManager.Tick();
+                MoveTo(newCellTarget);
 
-       
+                if (cellData.ContainedObject != null)
+                {
+                    cellData.ContainedObject.PlayerEntered();
+                }
+            }
+        }
    }
-
 }
