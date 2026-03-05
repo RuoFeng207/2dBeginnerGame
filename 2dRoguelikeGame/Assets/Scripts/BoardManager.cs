@@ -90,7 +90,7 @@ public class BoardManager : MonoBehaviour
                 m_Tilemap.SetTile(new Vector3Int(x, y, 0), tile);
             }
         }
-        GenerateFood();
         m_EmptyCellsList.Remove(new Vector2Int(1, 1));
+        GenerateFood();
     }
 }
