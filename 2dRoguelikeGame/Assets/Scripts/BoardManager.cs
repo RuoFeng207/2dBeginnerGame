@@ -12,6 +12,7 @@ public class BoardManager : MonoBehaviour
     public PlayerController Player;
     public FoodObject[] FoodPrefabs;
     private List<Vector2Int> m_EmptyCellsList;
+    public WallObject WallPrefab;
     
     public class CellData
     {
@@ -41,9 +42,8 @@ public class BoardManager : MonoBehaviour
 
     void GenerateFood()
     {
-        int maxFood = 5;
-        int randomFoodCount = Random.Range(0,maxFood);
-        for (int i = 0; i < randomFoodCount; ++i)
+        int foodCount = Random.Range(0, 5);
+        for (int i = 0; i < foodCount; ++i)
         {
             int randomIndex = Random.Range(0, m_EmptyCellsList.Count);
             Vector2Int coord = m_EmptyCellsList[randomIndex];
@@ -56,6 +56,30 @@ public class BoardManager : MonoBehaviour
             newFood.transform.position = CellToWorld(coord);
             data.ContainedObject = newFood;
         }
+    }
+
+    
+    void GenerateWall()
+    {
+        int wallCount = Random.Range(6, 10);
+        for (int i = 0; i < wallCount; ++i)
+        {
+            int randomIndex = Random.Range(0, m_EmptyCellsList.Count);
+            Vector2Int coord = m_EmptyCellsList[randomIndex];
+
+            m_EmptyCellsList.RemoveAt(randomIndex);
+            CellData data = m_BoardData[coord.x, coord.y];
+            WallObject newWall = Instantiate(WallPrefab);
+            newWall.Init(coord);
+            newWall.transform.position = CellToWorld(coord);
+
+            data.ContainedObject = newWall;
+        }
+    }
+
+    public void SetCellTile(Vector2Int cellIndex, Tile tile)
+    {
+        m_Tilemap.SetTile(new Vector3Int(cellIndex.x, cellIndex.y, 0), tile);
     }
 
    // Init is called before the first frame update
@@ -91,6 +115,7 @@ public class BoardManager : MonoBehaviour
             }
         }
         m_EmptyCellsList.Remove(new Vector2Int(1, 1));
+        GenerateWall();
         GenerateFood();
     }
 }
