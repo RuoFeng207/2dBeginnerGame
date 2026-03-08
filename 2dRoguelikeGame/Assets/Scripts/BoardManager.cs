@@ -13,15 +13,15 @@ public class BoardManager : MonoBehaviour
     public FoodObject[] FoodPrefabs;
     private List<Vector2Int> m_EmptyCellsList;
     public WallObject WallPrefab;
-    
+
     public class CellData
     {
         public bool Passable;
         public CellObject ContainedObject;
     }
-    
+
     private CellData[,] m_BoardData;
-    
+
     private Grid m_Grid;
 
     public Vector3 CellToWorld(Vector2Int cellIndex)
@@ -47,7 +47,7 @@ public class BoardManager : MonoBehaviour
         {
             int randomIndex = Random.Range(0, m_EmptyCellsList.Count);
             Vector2Int coord = m_EmptyCellsList[randomIndex];
-    
+
             m_EmptyCellsList.RemoveAt(randomIndex);
             CellData data = m_BoardData[coord.x, coord.y];
             FoodObject foodPrefab = FoodPrefabs[Random.Range(0, FoodPrefabs.Length)];
@@ -58,7 +58,7 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-    
+
     void GenerateWall()
     {
         int wallCount = Random.Range(6, 10);
@@ -70,7 +70,10 @@ public class BoardManager : MonoBehaviour
             m_EmptyCellsList.RemoveAt(randomIndex);
             CellData data = m_BoardData[coord.x, coord.y];
             WallObject newWall = Instantiate(WallPrefab);
+
+            //init the wall
             newWall.Init(coord);
+
             newWall.transform.position = CellToWorld(coord);
 
             data.ContainedObject = newWall;
@@ -82,8 +85,8 @@ public class BoardManager : MonoBehaviour
         m_Tilemap.SetTile(new Vector3Int(cellIndex.x, cellIndex.y, 0), tile);
     }
 
-   // Init is called before the first frame update
-   public void Init()
+    // Init is called before the first frame update
+    public void Init()
     {
         m_Tilemap = GetComponentInChildren<Tilemap>();
         m_Grid = GetComponentInChildren<Grid>();
@@ -93,12 +96,12 @@ public class BoardManager : MonoBehaviour
 
         for (int y = 0; y < Height; ++y)
         {
-            for(int x = 0; x < Width; ++x)
+            for (int x = 0; x < Width; ++x)
             {
                 Tile tile;
                 m_BoardData[x, y] = new CellData();
 
-                if(x == 0 || y == 0 || x == Width - 1 || y == Height - 1)
+                if (x == 0 || y == 0 || x == Width - 1 || y == Height - 1)
                 {
                     tile = WallTiles[Random.Range(0, WallTiles.Length)];
                     m_BoardData[x, y].Passable = false;
